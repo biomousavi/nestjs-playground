@@ -21,8 +21,19 @@ services:
     env_file:
       - ./apps/payments/.env
     ports:
-      - "3003:3003"
-      - "4003:3003"
+      - "4003:4003"
+    volumes:
+      - .:/usr/src/app
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/Dockerfile
+      target: development
+    command: "npm run start:dev notifications"
+    env_file:
+      - ./apps/notifications/.env
+    ports:
+      - "4004:3004"
     volumes:
       - .:/usr/src/app
   auth:
