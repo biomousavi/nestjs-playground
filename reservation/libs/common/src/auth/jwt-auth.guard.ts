@@ -32,13 +32,11 @@ export class JwtAuthGuard implements CanActivate {
       })
       .pipe(
         tap((res) => {
-          console.log('reees', res);
-
           context.switchToHttp().getRequest<Request>().user = res;
         }),
         map(() => true),
         catchError((err) => {
-          console.log(err, 'eeeeeeeeee');
+          console.log(err);
           return of(false);
         }),
       );

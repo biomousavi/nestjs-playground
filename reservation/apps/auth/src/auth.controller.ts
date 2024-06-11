@@ -24,8 +24,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @MessagePattern('authenticate')
   async authenticate(@Payload() payload: any) {
-    console.log(payload, 'ppppppppppppppp');
-
     return payload.user;
   }
 }
