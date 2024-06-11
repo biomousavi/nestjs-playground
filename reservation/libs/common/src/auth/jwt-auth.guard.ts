@@ -10,6 +10,7 @@ import { Request } from 'express';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { AUTH_SERVICE } from '../constants';
+import { UserDto } from '../dto';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -22,14 +23,11 @@ export class JwtAuthGuard implements CanActivate {
       context.switchToHttp().getRequest().cookies?.Authentication ||
       context.switchToHttp().getRequest()?.Authentication ||
       context.switchToHttp().getRequest().headers?.Authentication;
-    console.log('wwwwwwwwwwwww', jwt);
 
     if (!jwt) return false;
 
     return this.authClient
-      .send('authenticate', {
-        Authentication: jwt,
-      })
+      .send<UserDto>('authenticate', { Authentication: jwt })
       .pipe(
         tap((res) => {
           context.switchToHttp().getRequest<Request>().user = res;
