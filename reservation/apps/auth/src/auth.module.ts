@@ -19,7 +19,8 @@ import { JWTStrategy } from './strategies/jwt.strategy';
         MONGODB_URI: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().required(),
-        PORT: Joi.number().required(),
+        HTTP_PORT: Joi.number().required(),
+        TCP_PORT: Joi.number().required(),
       }),
     }),
     JwtModule.registerAsync({
@@ -33,6 +34,7 @@ import { JWTStrategy } from './strategies/jwt.strategy';
     }),
   ],
   controllers: [AuthController],
+  exports: [AuthService],
   providers: [AuthService, LocalStrategy, JWTStrategy],
 })
 export class AuthModule {}
