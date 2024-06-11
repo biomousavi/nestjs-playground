@@ -26,4 +26,4 @@ RUN npm install --only=prod
 # copy build source that used dev dependencies to prod
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD [ "node", "dist/apps/reservation/main" ]
+CMD [ "node", "dist/apps/payments/main" ]
