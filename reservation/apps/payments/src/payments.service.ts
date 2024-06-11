@@ -13,19 +13,23 @@ export class PaymentsService {
     },
   );
   async createCharge({ card, amount }: CreateChargeDto) {
-    const paymentMethod = await this.stripe.paymentMethods.create({
-      type: 'card',
-      card,
-    });
+    try {
+      const paymentMethod = await this.stripe.paymentMethods.create({
+        type: 'card',
+        card,
+      });
 
-    const paymentIntent = await this.stripe.paymentIntents.create({
-      payment_method: paymentMethod.id,
-      amount: amount * 100,
-      confirm: true,
-      payment_method_types: ['card'],
-      currency: 'usd',
-    });
+      const paymentIntent = await this.stripe.paymentIntents.create({
+        payment_method: paymentMethod.id,
+        amount: amount * 100,
+        confirm: true,
+        payment_method_types: ['card'],
+        currency: 'usd',
+      });
 
-    return paymentIntent;
+      return paymentIntent;
+    } catch (error) {
+      console.log('stripe error', error);
+    }
   }
 }
