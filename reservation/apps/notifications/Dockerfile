@@ -3,13 +3,21 @@ FROM node:alpine as development
 WORKDIR /usr/src/app
 
 COPY package.json ./
+COPY tsconfig.json tsconfig.json
 
+
+COPY apps/notifications apps/notifications
+COPY libs libs
+
+
+# install common dependencies
 RUN npm install 
 
-COPY . .
+# install micro-service dependencies
+RUN cd apps/notifications && npm install
 
+# build applicaiton
 RUN npm run build
-
 
 FROM node:alpine as production
 

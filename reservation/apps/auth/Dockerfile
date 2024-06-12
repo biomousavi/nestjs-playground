@@ -3,11 +3,20 @@ FROM node:alpine as development
 WORKDIR /usr/src/app
 
 COPY package.json ./
+COPY tsconfig.json tsconfig.json
 
+
+COPY apps/auth apps/auth
+COPY libs libs
+
+
+# install common dependencies
 RUN npm install 
 
-COPY . .
+# install micro-service dependencies
+RUN cd apps/auth && npm install
 
+# build applicaiton
 RUN npm run build
 
 
