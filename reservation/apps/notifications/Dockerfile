@@ -29,7 +29,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 
 # exclude dev dependencies
-RUN npm install --only=prod
+RUN npm install --omit=dev
 
 # copy build source that used dev dependencies to prod
 COPY --from=development /usr/src/app/dist ./dist

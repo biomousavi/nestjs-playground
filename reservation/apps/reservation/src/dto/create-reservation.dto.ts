@@ -1,4 +1,4 @@
-import { CreateChargeDto } from 'apps/payments/src/dto/create-charge.dto';
+import { CreateChargeDto } from '@app/common';
 import { Type } from 'class-transformer';
 import {
   IsDate,
