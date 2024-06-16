@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reservation
+  name: reservation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservation
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: reservation
+    spec:
+      containers:
+      - image: localhost/reservations
+        name: reservation
+        # imagePullPolicy: Never
+
