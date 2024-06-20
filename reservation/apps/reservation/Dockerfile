@@ -1,6 +1,8 @@
 FROM node:alpine as development
 
 WORKDIR /usr/src/app
+RUN apk --no-cache add curl
+
 
 COPY package.json ./
 COPY tsconfig.json tsconfig.json

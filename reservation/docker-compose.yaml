@@ -6,11 +6,16 @@ services:
     volumes:
       - ./e2e/specs:/usr/src/app/specs
     depends_on:
-      - reservations
-      - auth
-      - payments
-      - notifications
-      - mongo
+      auth: 
+        condition: service_started
+      payments:
+        condition: service_started
+      notifications:
+        condition: service_started
+      mongo:
+        condition: service_started
+      reservations:
+          condition: service_healthy
   reservations:
     build:
       context: .
@@ -24,6 +29,11 @@ services:
       - "4002:3002"
     volumes:
       - .:/usr/src/app
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
   payments:
     build:
       context: .

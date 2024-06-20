@@ -16,9 +16,13 @@ import {
 } from './models/reservation.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
+    HealthModule,
+    DatabaseModule,
+    LoggerModule,
     ClientsModule.registerAsync([
       {
         name: AUTH_SERVICE,
@@ -45,8 +49,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         }),
       },
     ]),
-    DatabaseModule,
-    LoggerModule,
+
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({

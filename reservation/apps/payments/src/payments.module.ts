@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { LoggerModule, NOTIFICAITONS_SERVICE } from '@app/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         TCP_PORT: Joi.number().required(),
       }),
     }),
+    HealthModule,
   ],
   controllers: [PaymentsController],
   providers: [PaymentsService],
