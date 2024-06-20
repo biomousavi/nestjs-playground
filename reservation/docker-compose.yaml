@@ -1,4 +1,16 @@
 services:
+  e2e:
+    build:
+      context: ./e2e
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./e2e/specs:/usr/src/app/specs
+    depends_on:
+      - reservations
+      - auth
+      - payments
+      - notifications
+      - mongo
   reservations:
     build:
       context: .
