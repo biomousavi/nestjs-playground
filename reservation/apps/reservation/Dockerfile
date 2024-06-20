@@ -5,15 +5,11 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY tsconfig.json tsconfig.json
 
+RUN npm install 
 
 COPY apps/reservation apps/reservation
 COPY libs libs
 
-# install common dependencies
-RUN npm install 
-
-# install micro-service dependencies
-RUN cd apps/reservation && npm install
 
 # build applicaiton
 RUN npm run build

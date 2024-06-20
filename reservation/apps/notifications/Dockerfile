@@ -5,16 +5,10 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY tsconfig.json tsconfig.json
 
+RUN npm install 
 
 COPY apps/notifications apps/notifications
 COPY libs libs
-
-
-# install common dependencies
-RUN npm install 
-
-# install micro-service dependencies
-RUN cd apps/notifications && npm install
 
 # build applicaiton
 RUN npm run build
@@ -27,9 +21,10 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /usr/src/app
 
 COPY package.json ./
+COPY package-lock.json ./
 
 # exclude dev dependencies
-RUN npm install --omit=dev
+RUN npm install 
 
 # copy build source that used dev dependencies to prod
 COPY --from=development /usr/src/app/dist ./dist

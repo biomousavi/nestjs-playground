@@ -33,7 +33,7 @@ services:
     env_file:
       - ./apps/notifications/.env
     ports:
-      - "4004:3004"
+      - "4004:4004"
     volumes:
       - .:/usr/src/app
   auth:
