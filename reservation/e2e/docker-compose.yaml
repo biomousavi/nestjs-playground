@@ -1,17 +1,34 @@
 services:
-  reservations:
+  e2e:
     build:
       context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./specs:/usr/src/app/specs
+    depends_on:
+      auth: 
+        condition: service_healthy
+      payments:
+        condition: service_started
+      notifications:
+        condition: service_started
+      mongo:
+        condition: service_started
+      reservations:
+          condition: service_healthy
+  reservations:
+    build:
+      context: ../
       dockerfile: ./apps/reservation/Dockerfile
       target: development
     command: "npm run start:dev reservation"
     env_file:
-      - ./apps/reservation/.env
+      - ../apps/reservation/.env
     ports:
       - "3002:3002"
       - "4002:3002"
     volumes:
-      - .:/usr/src/app
+      - ..:/usr/src/app
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
         interval: 5s
@@ -19,41 +36,41 @@ services:
         retries: 15
   payments:
     build:
-      context: .
+      context: ../
       dockerfile: ./apps/payments/Dockerfile
       target: development
     command: "npm run start:dev payments"
     env_file:
-      - ./apps/payments/.env
+      - ../apps/payments/.env
     ports:
       - "4003:4003"
     volumes:
-      - .:/usr/src/app
+      - ..:/usr/src/app
   notifications:
     build:
-      context: .
+      context: ../
       dockerfile: ./apps/notifications/Dockerfile
       target: development
     command: "npm run start:dev notifications"
     env_file:
-      - ./apps/notifications/.env
+      - ../apps/notifications/.env
     ports:
       - "4004:4004"
     volumes:
-      - .:/usr/src/app
+      - ..:/usr/src/app
   auth:
     build:
-      context: .
+      context: ../
       dockerfile: ./apps/auth/Dockerfile
       target: development
     command: "npm run start:dev auth"
     env_file:
-      - ./apps/auth/.env
+      - ../apps/auth/.env
     ports:
       - "3001:3001"
       - "4001:4001"
     volumes:
-      - .:/usr/src/app
+      - ..:/usr/src/app
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
         interval: 5s
