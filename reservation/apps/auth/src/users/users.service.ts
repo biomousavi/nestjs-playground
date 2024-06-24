@@ -12,11 +12,12 @@ import { GetUserDto } from './dto/get-user.dto';
 export class UsersService {
   constructor(private readonly userRepository: UsersRepository) {}
 
-  async create({ email, password }: CreateUserDto) {
+  async create({ email, password, roles }: CreateUserDto) {
     await this.validateCreateUserDto({ email, password });
 
     return this.userRepository.create({
       email,
+      roles,
       password: await bcrypt.hash(password, 10),
     });
   }
