@@ -1,21 +1,4 @@
 services:
-  e2e:
-    build:
-      context: ./e2e
-      dockerfile: ./Dockerfile
-    volumes:
-      - ./e2e/specs:/usr/src/app/specs
-    depends_on:
-      auth: 
-        condition: service_started
-      payments:
-        condition: service_started
-      notifications:
-        condition: service_started
-      mongo:
-        condition: service_started
-      reservations:
-          condition: service_healthy
   reservations:
     build:
       context: .
