@@ -31,9 +31,9 @@ services:
       - .:/usr/src/app
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
+        interval: 5s
+        timeout: 5s
+        retries: 15
   payments:
     build:
       context: .
@@ -73,9 +73,8 @@ services:
       - .:/usr/src/app
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
-      
+        interval: 5s
+        timeout: 5s
+        retries: 15      
   mongo:
     image: mongo
