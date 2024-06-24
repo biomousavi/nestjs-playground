@@ -1,4 +1,21 @@
 services:
+  e2e:
+    build:
+      context: ./e2e
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./e2e/specs:/usr/src/app/specs
+    depends_on:
+      auth: 
+        condition: service_healthy
+      payments:
+        condition: service_started
+      notifications:
+        condition: service_started
+      mongo:
+        condition: service_started
+      reservations:
+          condition: service_healthy
   reservations:
     build:
       context: .
@@ -54,6 +71,11 @@ services:
       - "4001:4001"
     volumes:
       - .:/usr/src/app
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
       
   mongo:
     image: mongo
