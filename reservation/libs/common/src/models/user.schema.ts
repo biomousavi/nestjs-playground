@@ -1,16 +1,16 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { AbstractDocument } from '@app/common';
+import { AbstractEntity } from '@app/common';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Role } from './role.entity';
 
-@Schema({ versionKey: false })
-export class UserDocument extends AbstractDocument {
-  @Prop()
+@Entity()
+export class User extends AbstractEntity<User> {
+  @Column()
   email: string;
 
-  @Prop()
+  @Column()
   password: string;
 
-  @Prop()
-  roles?: string[];
+  @ManyToMany(() => Role, { cascade: true })
+  @JoinTable()
+  roles?: Role[];
 }
-
-export const UserSchema = SchemaFactory.createForClass(UserDocument);

@@ -4,29 +4,29 @@ services:
       context: .
       dockerfile: ./apps/reservation/Dockerfile
       target: development
-    command: "npm run start:dev reservation"
+    command: 'npm run start:dev reservation'
     env_file:
       - ./apps/reservation/.env
     ports:
-      - "3002:3002"
-      - "4002:3002"
+      - '3002:3002'
+      - '4002:3002'
     volumes:
       - .:/usr/src/app
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
-        interval: 5s
-        timeout: 5s
-        retries: 15
+      test: ['CMD', 'curl', '-f', 'http://localhost:3002/health']
+      interval: 5s
+      timeout: 5s
+      retries: 15
   payments:
     build:
       context: .
       dockerfile: ./apps/payments/Dockerfile
       target: development
-    command: "npm run start:dev payments"
+    command: 'npm run start:dev payments'
     env_file:
       - ./apps/payments/.env
     ports:
-      - "4003:4003"
+      - '4003:4003'
     volumes:
       - .:/usr/src/app
   notifications:
@@ -34,11 +34,11 @@ services:
       context: .
       dockerfile: ./apps/notifications/Dockerfile
       target: development
-    command: "npm run start:dev notifications"
+    command: 'npm run start:dev notifications'
     env_file:
       - ./apps/notifications/.env
     ports:
-      - "4004:4004"
+      - '4004:4004'
     volumes:
       - .:/usr/src/app
   auth:
@@ -46,18 +46,22 @@ services:
       context: .
       dockerfile: ./apps/auth/Dockerfile
       target: development
-    command: "npm run start:dev auth"
+    command: 'npm run start:dev auth'
     env_file:
       - ./apps/auth/.env
     ports:
-      - "3001:3001"
-      - "4001:4001"
+      - '3001:3001'
+      - '4001:4001'
     volumes:
       - .:/usr/src/app
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
-        interval: 5s
-        timeout: 5s
-        retries: 15      
-  mongo:
-    image: mongo
+      test: ['CMD', 'curl', '-f', 'http://localhost:3001/health']
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  mysql:
+    image: mysql
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'

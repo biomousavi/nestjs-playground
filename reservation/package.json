@@ -31,6 +31,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/terminus": "^10.2.3",
+    "@nestjs/typeorm": "^10.0.2",
     "@types/cookie-parser": "^1.4.7",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
@@ -40,6 +41,7 @@
     "express": "^4.19.2",
     "joi": "^17.13.1",
     "mongoose": "^8.4.1",
+    "mysql2": "^3.10.1",
     "nestjs-pino": "^4.1.0",
     "nodemailer": "^6.9.13",
     "passport": "^0.7.0",
@@ -49,7 +51,8 @@
     "pino-pretty": "^11.1.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "stripe": "^15.10.0"
+    "stripe": "^15.10.0",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
