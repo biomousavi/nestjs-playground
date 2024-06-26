@@ -15,10 +15,10 @@ import { HealthModule } from './health/health.module';
         name: NOTIFICAITONS_SERVICE,
         inject: [ConfigService],
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.TCP,
+          transport: Transport.RMQ,
           options: {
-            host: configService.get('NOTIFICATIONS_HOST'),
-            port: configService.get('NOTIFICATIONS_TCP_PORT'),
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')!],
+            queue: 'notifications',
           },
         }),
       },

@@ -53,7 +53,7 @@ services:
       retries: 15
   mongo:
     image: mongo
-  # rabbitmq:
-  #   image: rabbitmq
-  #   ports:
-  #     - '5672:5672'
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
