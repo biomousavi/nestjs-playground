@@ -12,7 +12,7 @@ async function bootstrap() {
 
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.TCP,
-    options: { host: '0.0.0.0', port: configService.get('TCP_PORT') },
+    options: { host: '0.0.0.0', port: configService.get('AUTH_TCP_PORT') },
   });
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
@@ -20,7 +20,7 @@ async function bootstrap() {
 
   await app.startAllMicroservices();
 
-  const httpPort = configService.get<string>('HTTP_PORT')!;
+  const httpPort = configService.get<string>('AUTH_HTTP_PORT')!;
   await app.listen(httpPort, () => {
     console.log('-- Auth service running on port', httpPort);
   });

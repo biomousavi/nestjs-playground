@@ -14,7 +14,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
-  const httpPort = configService.get<string>('HTTP_PORT')!;
+  const httpPort = configService.get<string>('RESERVATIONS_HTTP_PORT')!;
   await app.listen(httpPort, () => {
     console.log('-- Reservation service running on port', httpPort);
   });

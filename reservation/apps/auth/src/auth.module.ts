@@ -20,8 +20,8 @@ import { HealthModule } from './health/health.module';
         MONGODB_URI: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().required(),
-        HTTP_PORT: Joi.number().required(),
-        TCP_PORT: Joi.number().required(),
+        AUTH_HTTP_PORT: Joi.number().required(),
+        AUTH_TCP_PORT: Joi.number().required(),
       }),
     }),
     JwtModule.registerAsync({

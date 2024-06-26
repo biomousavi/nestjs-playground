@@ -32,6 +32,8 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/terminus": "^10.2.3",
     "@types/cookie-parser": "^1.4.7",
+    "amqp-connection-manager": "^4.1.14",
+    "amqplib": "^0.10.4",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",

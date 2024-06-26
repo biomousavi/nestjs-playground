@@ -18,7 +18,7 @@ import { HealthModule } from './health/health.module';
           transport: Transport.TCP,
           options: {
             host: configService.get('NOTIFICATIONS_HOST'),
-            port: configService.get('NOTIFICATIONS_PORT'),
+            port: configService.get('NOTIFICATIONS_TCP_PORT'),
           },
         }),
       },
@@ -28,8 +28,8 @@ import { HealthModule } from './health/health.module';
       validationSchema: Joi.object({
         STRIPE_SECRET_KEY: Joi.string().required(),
         NOTIFICATIONS_HOST: Joi.string().required(),
-        NOTIFICATIONS_PORT: Joi.number().required(),
-        TCP_PORT: Joi.number().required(),
+        NOTIFICATIONS_TCP_PORT: Joi.number().required(),
+        PAYMENTS_TCP_PORT: Joi.number().required(),
       }),
     }),
     HealthModule,

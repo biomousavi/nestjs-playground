@@ -12,7 +12,7 @@ import * as Joi from 'joi';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        TCP_PORT: Joi.number().required(),
+        NOTIFICATIONS_TCP_PORT: Joi.number().required(),
       }),
     }),
     HealthModule,
