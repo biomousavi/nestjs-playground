@@ -4,6 +4,7 @@
   "sourceRoot": "apps/reservation/src",
   "compilerOptions": {
     "deleteOutDir": true,
+    "assets": ["**/*.proto"],
     "webpack": true,
     "tsConfigPath": "apps/reservation/tsconfig.app.json"
   },
